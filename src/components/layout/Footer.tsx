@@ -1,12 +1,27 @@
-'use client';
+"use client";
+
+import { Box, Typography, useTheme } from "@mui/material";
 
 export const Footer = () => {
   const year = new Date().getFullYear();
+  const theme = useTheme();
 
   return (
-    <footer className="footer">
-      <span>Desarrollado por [Sam Padilla]</span>
-      <span>© {year}</span>
-    </footer>
+    <Box
+      component="footer"
+      sx={{
+        display: "flex",
+        height: 60,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 4,
+        bgcolor: theme.palette.primary.main,
+        color: 'white',
+        mt: 'auto'
+      }}
+    >
+      <Typography color="inherit">Desarrollado por [Sam Padilla]</Typography>
+      <Typography color="inherit">{year}</Typography>
+    </Box>
   );
-}
+};

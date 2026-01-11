@@ -8,7 +8,7 @@ import { Sidebar } from "@/components/home/Sidebar";
 import { Pagination } from "@/components/home/Pagination";
 import { RecipesTable } from "@/components/home/RecipesTable";
 
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 const HomePage = () => {
   const {
@@ -64,7 +64,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6">
+    <Box sx={{ display: "flex", maxWidth: 1600, justifyContent: "center", gap: 4 }}>
       <Sidebar />
 
       <section className="flex flex-col gap-6">
@@ -98,7 +98,7 @@ const HomePage = () => {
           onNext={handleNextPage}
         />
       </section>
-    </div>
+    </Box>
   );
 }
 

@@ -8,7 +8,20 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1976d2',
+      main: '#5F3F98',
+    },
+    background: {
+      default: '#e1ddf5',
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background: '#e1ddf5',
+          backgroundAttachment: 'fixed',
+        },
+      },
     },
   },
 });

@@ -20,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <ThemeRegistry> {children}</ThemeRegistry>
-          {/* <Navbar /> */}
-          {/* <Footer /> */}
+        <ThemeRegistry>
+          <Navbar />
+            {children}
+          <Footer />
+        </ThemeRegistry>
       </body>
     </html>
   );
