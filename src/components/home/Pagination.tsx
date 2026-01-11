@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { Button } from "@mui/material";
+import { Box, Button, Typography, Stack } from "@mui/material";
 
 interface PaginationProps {
   currentPage: number;
@@ -9,7 +9,7 @@ interface PaginationProps {
   onNext: () => void;
 }
 
-export const Pagination =({
+export const Pagination = ({
   currentPage,
   totalPages,
   onPrev,
@@ -18,24 +18,34 @@ export const Pagination =({
   if (totalPages <= 1) return null;
 
   return (
-    <div>
-      <span>
-        Página {currentPage} de {totalPages}
-      </span>
-      <div>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        gap: 2,
+        py: 2,
+      }}
+    >
+      <Typography variant="body2" color="text.secondary">
+        {currentPage} / {totalPages}
+      </Typography>
+      <Stack direction="row" spacing={2}>
         <Button
+          variant="outlined"
           onClick={onPrev}
           disabled={currentPage === 1}
         >
-          Anterior
+          Prev
         </Button>
         <Button
+          variant="contained"
           onClick={onNext}
           disabled={currentPage === totalPages}
         >
-          Siguiente
+         Next 
         </Button>
-      </div>
-    </div>
+      </Stack>
+    </Box>
   );
-}
+};

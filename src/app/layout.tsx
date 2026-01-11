@@ -9,7 +9,7 @@ import ThemeRegistry from '@/lib/ThemeRegistry';
 
 export const metadata: Metadata = {
   title: "Recipe Explorer",
-  description: "Prueba técnica - Recetas con Next.js y shadcn/ui",
+  description: "Recipes with Next.js & MUI",
 };
 
 export default function RootLayout({

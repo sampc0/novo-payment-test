@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useMemo } from "react";
 import { useRecipesStore } from "@/store/recipeStore";
@@ -8,7 +8,7 @@ import { Sidebar } from "@/components/home/Sidebar";
 import { Pagination } from "@/components/home/Pagination";
 import { RecipesTable } from "@/components/home/RecipesTable";
 
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 const HomePage = () => {
   const {
@@ -43,10 +43,7 @@ const HomePage = () => {
     return filtered;
   }, [recipes, selectedDifficulty, searchQuery]);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredRecipes.length / pageSize)
-  );
+  const totalPages = Math.max(1, Math.ceil(filteredRecipes.length / pageSize));
   const safePage = Math.min(currentPage, totalPages);
 
   const paginatedRecipes = useMemo<Recipe[]>(() => {
@@ -64,42 +61,41 @@ const HomePage = () => {
   };
 
   return (
-    <Box sx={{ display: "flex", maxWidth: 1600, justifyContent: "center", gap: 4 }}>
-      <Sidebar />
+    <Box sx={{ display: "flex", justifyContent: "center", p: 5 }}>
+      <Box sx={{ display: "flex", maxWidth: 1300, width: '100%', gap: 5 }}>
+        <Sidebar />
 
-      <section className="flex flex-col gap-6">
-        <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div>
-            <h2 className="text-2xl font-bold">Recetas</h2>
-            <p className="text-sm text-gray-600">
-              Mostrando {paginatedRecipes.length} de {filteredRecipes.length}{" "}
-              recetas filtradas.
-            </p>
-          </div>
+        <Box component="section" sx={{ flex: 1, minWidth: 0, minHeight: '80vh' }}>
+          <header>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%"
+              }}
+            >
+              <Typography variant="h5" >
+                Recipes
+              </Typography>
+              <Pagination
+                currentPage={safePage}
+                totalPages={totalPages}
+                onPrev={handlePrevPage}
+                onNext={handleNextPage}
+              />
+            </Box>
+          </header>
 
-          <Button
-            onClick={fetchRecipes}
-            disabled={isLoading}
-          >
-            {isLoading ? "Cargando..." : "Recargar"}
-          </Button>
-        </header>
-
-        <RecipesTable
-          recipes={paginatedRecipes}
-          isLoading={isLoading}
-          error={error}
-        />
-
-        <Pagination
-          currentPage={safePage}
-          totalPages={totalPages}
-          onPrev={handlePrevPage}
-          onNext={handleNextPage}
-        />
-      </section>
+          <RecipesTable
+            recipes={paginatedRecipes}
+            isLoading={isLoading}
+            error={error}
+          />
+        </Box>
+      </Box>
     </Box>
   );
-}
+};
 
 export default HomePage;

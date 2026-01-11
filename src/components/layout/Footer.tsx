@@ -16,7 +16,7 @@ export const Footer = () => {
         justifyContent: "center",
         gap: 4,
         bgcolor: theme.palette.primary.main,
-        color: 'white',
+        color: 'aliceblue',
         mt: 'auto'
       }}
     >

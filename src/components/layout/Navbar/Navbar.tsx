@@ -39,6 +39,7 @@ const Search = styled("div")(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   width: "100%",
+  paddingLeft: "0.5em",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     transition: theme.transitions.create("width"),
@@ -84,7 +85,7 @@ export const Navbar = () => {
               <IconButton
                 onClick={toggleDrawer(true)}
                 edge="end"
-                sx={{ color: "white" }}
+                sx={{ color: "aliceblue" }}
               >
                 <MenuIcon size={24} />
               </IconButton>
@@ -99,8 +100,9 @@ export const Navbar = () => {
                   />
                 </Search>
                 <Button
+                  size="small"
                   variant="outlined"
-                  sx={{ color: "white", borderColor: "white" }}
+                  sx={{ color: "aliceblue", borderColor: "aliceblue" }}
                 >
                   Log In
                 </Button>
@@ -114,12 +116,6 @@ export const Navbar = () => {
         anchor="right"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
-        PaperProps={{
-          sx: {
-            bgcolor: "primary.main",
-            color: "white",
-          },
-        }}
       >
         <Box className="drawer-box" sx={{ width: 280, p: 2 }}>
           <List>
