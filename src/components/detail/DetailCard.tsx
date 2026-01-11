@@ -1,22 +1,17 @@
 'use client';
 
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import type { Recipe } from "@/types/recipes";
+import { Badge, Button, Card, CardContent, CardHeader } from "@mui/material";
 
 interface DetailCardProps {
   recipe: Recipe;
   onBack: () => void;
 }
 
-export function DetailCard({ recipe, onBack }: DetailCardProps) {
+export const DetailCard = ({ recipe, onBack }: DetailCardProps) => {
   return (
     <section className="max-w-4xl mx-auto px-4">
       <Button
-        variant="outline"
-        size="sm"
         onClick={onBack}
         className="mb-3"
       >
@@ -27,7 +22,7 @@ export function DetailCard({ recipe, onBack }: DetailCardProps) {
         <CardHeader>
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
             <div>
-              <CardTitle>{recipe.name}</CardTitle>
+              <p>{recipe.name}</p>
               <p className="text-sm text-gray-600 mt-1">
                 {recipe.cuisine} · {recipe.difficulty} · {recipe.servings}{" "}
                 porciones
@@ -35,36 +30,33 @@ export function DetailCard({ recipe, onBack }: DetailCardProps) {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              <Badge variant="outline">
+              <Badge>
                 ⭐ {recipe.rating.toFixed(1)} ({recipe.reviewCount} reviews)
               </Badge>
-              <Badge variant="outline">
+              <Badge>
                 {recipe.mealType.join(", ")}
               </Badge>
             </div>
           </div>
         </CardHeader>
 
-        <CardContent className="space-y-4">
+        <CardContent>
           {recipe.image && (
             <img
               src={recipe.image}
               alt={recipe.name}
-              className="w-full max-h-80 object-cover rounded-lg"
             />
           )}
 
-          <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+          <div>
             <span>Prep: {recipe.prepTimeMinutes} min</span>
             <span>Cocción: {recipe.cookTimeMinutes} min</span>
             <span>Calorías: {recipe.caloriesPerServing} kcal</span>
           </div>
 
-          <Separator />
-
           <div>
-            <h3 className="font-semibold mb-1 text-gray-900">Ingredientes</h3>
-            <ul className="list-disc list-inside text-sm text-gray-700">
+            <h3>Ingredientes</h3>
+            <ul>
               {recipe.ingredients.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
@@ -72,8 +64,8 @@ export function DetailCard({ recipe, onBack }: DetailCardProps) {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-1 text-gray-900">Instrucciones</h3>
-            <ol className="list-decimal list-inside text-sm text-gray-700 space-y-1">
+            <h3>Instrucciones</h3>
+            <ol>
               {recipe.instructions.map((step, idx) => (
                 <li key={idx}>{step}</li>
               ))}

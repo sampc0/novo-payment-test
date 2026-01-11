@@ -6,11 +6,11 @@ import type { Recipe } from "@/types/recipes";
 
 import { Sidebar } from "@/components/home/Sidebar";
 import { Pagination } from "@/components/home/Pagination";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
 import { RecipesTable } from "@/components/home/RecipesTable";
 
-export default function HomePage() {
+import { Button } from "@mui/material";
+
+const HomePage = () => {
   const {
     recipes,
     isLoading,
@@ -78,16 +78,12 @@ export default function HomePage() {
           </div>
 
           <Button
-            variant="outline"
-            size="sm"
             onClick={fetchRecipes}
             disabled={isLoading}
           >
             {isLoading ? "Cargando..." : "Recargar"}
           </Button>
         </header>
-
-        <Separator />
 
         <RecipesTable
           recipes={paginatedRecipes}
@@ -105,3 +101,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+export default HomePage;

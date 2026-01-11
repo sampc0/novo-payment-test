@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@mui/material";
 
 interface PaginationProps {
   currentPage: number;
@@ -18,22 +18,18 @@ export const Pagination =({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="pagination">
+    <div>
       <span>
         Página {currentPage} de {totalPages}
       </span>
-      <div className="flex gap-2">
+      <div>
         <Button
-          size="sm"
-          variant="outline"
           onClick={onPrev}
           disabled={currentPage === 1}
         >
           Anterior
         </Button>
         <Button
-          size="sm"
-          variant="outline"
           onClick={onNext}
           disabled={currentPage === totalPages}
         >
