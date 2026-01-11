@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useRecipesStore } from "@/store/recipeStore";
 import { DetailCard } from "@/components/detail/DetailCard";
 import type { Recipe } from "@/types/recipes";
-import { Button } from "@/components/ui/button";
+import { Box, Button, CircularProgress, Alert, Container } from "@mui/material";
 
 export default function RecipeDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -13,7 +13,6 @@ export default function RecipeDetailPage() {
 
   const { recipes, fetchRecipes, isLoading, error } = useRecipesStore();
 
-  // Si no hay recetas en el store (navegación directa), las cargamos
   useEffect(() => {
     if (recipes.length === 0) {
       fetchRecipes();
@@ -27,41 +26,41 @@ export default function RecipeDetailPage() {
 
   if (isLoading && !recipe) {
     return (
-      <section className="recipe-detail-container">
-        <p>Cargando receta...</p>
-      </section>
+      <Container maxWidth="lg" sx={{ py: 8, display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Container>
     );
   }
 
   if (error && !recipe) {
     return (
-      <section className="recipe-detail-container">
-        <p style={{ color: "#fecaca" }}>{error}</p>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Alert severity="error" sx={{ mb: 3 }}>
+          {error}
+        </Alert>
         <Button
-          variant="outline"
-          size="sm"
-          className="mt-3"
+          variant="outlined"
           onClick={() => router.push("/")}
         >
-          Volver a la lista
+          Back to list
         </Button>
-      </section>
+      </Container>
     );
   }
 
   if (!recipe) {
     return (
-      <section className="recipe-detail-container">
-        <p>No se encontró la receta.</p>
+      <Container maxWidth="lg" sx={{ py: 8 }}>
+        <Alert severity="info" sx={{ mb: 3 }}>
+          Recipe not found.
+        </Alert>
         <Button
-          variant="outline"
-          size="sm"
-          className="mt-3"
+          variant="outlined"
           onClick={() => router.push("/")}
         >
-          Volver a la lista
+          Back to list
         </Button>
-      </section>
+      </Container>
     );
   }
 

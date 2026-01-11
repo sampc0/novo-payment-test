@@ -12,8 +12,10 @@ import {
   CircularProgress,
   Alert,
   Stack,
-  Rating
+  Rating,
+  CardActionArea
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 interface RecipeTableProps {
   recipes: Recipe[];
@@ -22,6 +24,7 @@ interface RecipeTableProps {
 }
 
 export const RecipesTable = ({ recipes, isLoading, error }: RecipeTableProps) => {
+  const router = useRouter();
   if (isLoading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', py: 8, minWidthwidth: '100%' }}>
@@ -40,7 +43,7 @@ export const RecipesTable = ({ recipes, isLoading, error }: RecipeTableProps) =>
 
   if (recipes.length === 0) {
     return (
-      <Alert severity="info" sx={{ my: 3 }}>
+      <Alert severity="info" sx={{ mb: 3 }}>
         No recipes found with the selected filters.
       </Alert>
     );
@@ -67,6 +70,11 @@ export const RecipesTable = ({ recipes, isLoading, error }: RecipeTableProps) =>
       >
         {recipes.map((recipe) => (
           <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
             key={recipe.id}
             sx={{
               display: 'flex',
@@ -88,47 +96,49 @@ export const RecipesTable = ({ recipes, isLoading, error }: RecipeTableProps) =>
                 }
               }}
             >
-            <CardMedia
-              component="img"
-              height="200"
-              image={recipe.image}
-              alt={recipe.name}
-              sx={{ objectFit: 'cover' }}
-            />
-            <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-              <Typography variant="h6" component="h3" gutterBottom noWrap>
-                {recipe.name}
-              </Typography>
-
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1 }}>
-                <Rating value={recipe.rating} precision={0.1} size="small" readOnly />
-                <Typography variant="body2" color="text.secondary">
-                  ({recipe.reviewCount})
-                </Typography>
-              </Box>
-
-              <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
-                <Chip
-                  label={recipe.difficulty}
-                  size="small"
-                  color={getDifficultyColor(recipe.difficulty)}
+              <CardActionArea onClick={() => router.push(`/recipes/${recipe.id}`)}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={recipe.image}
+                  alt={recipe.name}
+                  sx={{ objectFit: 'cover' }}
                 />
-                <Chip
-                  label={recipe.cuisine}
-                  size="small"
-                  variant="outlined"
-                />
-              </Stack>
+                <CardContent sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                  <Typography variant="h6" component="h3" gutterBottom noWrap>
+                    {recipe.name}
+                  </Typography>
 
-              <Box sx={{ mt: 'auto' }}>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Time: {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Servings: {recipe.servings}
-                </Typography>
-              </Box>
-            </CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 1 }}>
+                    <Rating value={recipe.rating} precision={0.1} size="small" readOnly />
+                    <Typography variant="body2" color="text.secondary">
+                      ({recipe.reviewCount})
+                    </Typography>
+                  </Box>
+
+                  <Stack direction="row" spacing={1} sx={{ mb: 2, flexWrap: 'wrap', gap: 1 }}>
+                    <Chip
+                      label={recipe.difficulty}
+                      size="small"
+                      color={getDifficultyColor(recipe.difficulty)}
+                    />
+                    <Chip
+                      label={recipe.cuisine}
+                      size="small"
+                      variant="outlined"
+                    />
+                  </Stack>
+
+                  <Box sx={{ mt: 'auto' }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
+                      Time: {recipe.prepTimeMinutes + recipe.cookTimeMinutes} min
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Servings: {recipe.servings}
+                    </Typography>
+                  </Box>
+                </CardContent>
+              </CardActionArea>
             </Card>
           </Grid>
         ))}

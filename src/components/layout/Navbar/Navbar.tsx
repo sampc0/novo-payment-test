@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { UtensilsCrossed, Menu as MenuIcon, SearchIcon } from "lucide-react";
 import { useRecipesStore } from "@/store/recipeStore";
+import { DifficultyFilters } from "@/components/home/DifficultyFilters";
 import {
   AppBar,
   Toolbar,
@@ -116,18 +117,30 @@ export const Navbar = () => {
         anchor="right"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
+        PaperProps={{
+          sx: {
+            bgcolor: 'primary.main',
+          }
+        }}
       >
         <Box className="drawer-box" sx={{ width: 280, p: 2 }}>
           <List>
             <ListItem
               sx={{ flexDirection: "column", gap: 2, alignItems: "stretch" }}
             >
-              <Search>
+              <Search sx={{ bgcolor: 'rgba(255, 255, 255, 0.15)' }}>
                 <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  sx={{
+                    color: 'white',
+                    '& input::placeholder': {
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      opacity: 1,
+                    }
+                  }}
                 />
               </Search>
               <Button
@@ -137,6 +150,9 @@ export const Navbar = () => {
               >
                 Log In
               </Button>
+            </ListItem>
+            <ListItem sx={{ flexDirection: "column", alignItems: "stretch", mt: 2 }}>
+              <DifficultyFilters inDrawer onFilterChange={() => toggleDrawer(false)()} />
             </ListItem>
           </List>
         </Box>
