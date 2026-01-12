@@ -70,11 +70,7 @@ export const RecipesTable = ({ recipes, isLoading, error }: RecipeTableProps) =>
       >
         {recipes.map((recipe) => (
           <Grid
-            item
-            xs={12}
-            sm={6}
-            md={4}
-            lg={3}
+            size={{ xs: 12, sm: 6, md: 5, lg: 3 }}
             key={recipe.id}
             sx={{
               display: 'flex',

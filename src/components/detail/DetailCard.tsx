@@ -90,7 +90,7 @@ export const DetailCard = ({ recipe, onBack }: DetailCardProps) => {
           <Divider sx={{ my: 3 }} />
 
           <Grid container spacing={3} sx={{ mb: 3 }}>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Clock size={20} color="gray" />
                 <Box>
@@ -103,7 +103,7 @@ export const DetailCard = ({ recipe, onBack }: DetailCardProps) => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Clock size={20} color="gray" />
                 <Box>
@@ -116,7 +116,7 @@ export const DetailCard = ({ recipe, onBack }: DetailCardProps) => {
                 </Box>
               </Box>
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid size={{ xs: 12, sm: 4 }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                 <Flame size={20} color="gray" />
                 <Box>

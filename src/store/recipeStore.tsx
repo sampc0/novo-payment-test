@@ -34,7 +34,7 @@ export const useRecipesStore = create<RecipesState>((set, get) => ({
   },
 
   currentPage: 1,
-  pageSize: 9,
+  pageSize: 8,
   setCurrentPage(page) {
     set({ currentPage: page });
   },
